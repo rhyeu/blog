@@ -1,6 +1,17 @@
 ---
-date: "2016-05-05T21:48:51-07:00"
+date: "2019-09-09T22:27:51-07:00"
 title: About
 ---
 
-This is a "hello world" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium).
+류성균의 블로그 입니다.
+
+## 학력
+
+#### 석사 : 중앙대학교 대학원 통계학 석사과정
+  - 관심 분야
+    - 베이지안 모델링
+    - 클러스터링
+    - 머신러닝 일반
+    
+#### 학사 : 중앙대학교 공공인재학부(행정학) / 응용통계
+

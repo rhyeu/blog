@@ -1,9 +1,9 @@
-baseurl = "/"
+baseurl = "https://rhyeu.netlify.com/"
 languageCode = "ko-KR"
 title = "Rhyeu's blog"
 theme = "hugo-lithium"
 googleAnalytics = ""
-disqusShortname = ""
+disqusShortname = "rhyeu"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 hasCJKLanguage = true  # Set `true` for Chinese/Japanese/Korean languages.
 enableEmoji = true
