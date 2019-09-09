@@ -23,7 +23,7 @@ canonifyurls = true
     url = "https://www.kaggle.com/srhyeu"
 
 [params]
-    description = "A website built through Hugo and blogdown."
+    description = "류성균의 블로그입니다."
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
