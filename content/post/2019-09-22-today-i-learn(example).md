@@ -2,7 +2,7 @@
 title: Today I Learn / 주피터 노트북 변환(예시)
 author: 류성균
 date: '2019-09-22'
-slug: today-i-learn
+slug: today-i-learn-example
 categories:
   - Today I learn
 tags:
