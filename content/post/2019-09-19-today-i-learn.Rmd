@@ -1,5 +1,5 @@
 ---
-title: Today I Learn / python tip
+title: Today I Learn / python tip (print, list, 진법, 몫, 나머지)
 author: 류성균
 date: '2019-09-19'
 slug: today-i-learn
