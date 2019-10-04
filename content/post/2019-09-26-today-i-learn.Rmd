@@ -1,5 +1,5 @@
 ---
-title: Today I Learn / 파이썬 팁 - 리스트 출력, 연산자, range 함수수
+title: Today I Learn / 파이썬 팁 - 리스트 출력, 연산자, range 함수
 author: 류성균
 date: '2019-09-26'
 slug: today-i-learn

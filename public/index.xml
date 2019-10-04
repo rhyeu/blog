@@ -2,120 +2,129 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rhyeu&#39;s blog</title>
-    <link>/</link>
+    <link>https://rhyeu.netlify.com/</link>
     <description>Recent content on Rhyeu&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 26 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 03 Oct 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://rhyeu.netlify.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Today I Learn / 파이썬 팁 - 리스트 출력, 연산자, range 함수수</title>
-      <link>/2019/09/26/today-i-learn/</link>
+      <title>Today I Learn / list 중복 없애기,</title>
+      <link>https://rhyeu.netlify.com/2019/10/03/today-i-learn/</link>
+      <pubDate>Thu, 03 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://rhyeu.netlify.com/2019/10/03/today-i-learn/</guid>
+      <description>list 중복 없애기 참조 : https://bluese05.tistory.com/13 파이썬 리스트에서 중복을 없애기 위해서 이것저것 방법이 있겠지만 ‘set’ 자료형을 사용하면 쉽게 바꿀 수 있다. ‘set’ 자료형의 특징</description>
+    </item>
+    
+    <item>
+      <title>Today I Learn / 파이썬 팁 - 리스트 출력, 연산자, range 함수</title>
+      <link>https://rhyeu.netlify.com/2019/09/26/today-i-learn/</link>
       <pubDate>Thu, 26 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/09/26/today-i-learn/</guid>
+      <guid>https://rhyeu.netlify.com/2019/09/26/today-i-learn/</guid>
       <description>괄호 없이 리스트 출력하기 리스트 a = [1,2,&amp;#39;X&amp;#39;,4,5] print(*a, sep = &amp;quot; &amp;quot;) ## 1 2 X 4 5 파이썬 비트 연산자 AND : &amp;amp; OR : | XOR : ^ NOT : ~ 삼항 연산자 익숙해지면 코드가 더 간단해 질듯 a = 10</description>
     </item>
     
     <item>
       <title>Today I Learn / 주피터 노트북 변환(예시)</title>
-      <link>/2019/09/22/today-i-learn-example/</link>
+      <link>https://rhyeu.netlify.com/2019/09/22/today-i-learn-example/</link>
       <pubDate>Sun, 22 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/09/22/today-i-learn-example/</guid>
+      <guid>https://rhyeu.netlify.com/2019/09/22/today-i-learn-example/</guid>
       <description>1장 numpy import numpy as np x = np.array([[1,2,3],[4,5,6]]) print(&amp;quot;x:\n{}&amp;quot;.format(x)) Scipy from scipy import sparse ## 대각선 원소는 1이고 나머지는 0인 2차원 Numpy 배열 만들기 eye = np.eye(4) print(&amp;quot;Numpy 배열:\n{}&amp;quot;.format(eye)</description>
     </item>
     
     <item>
       <title>Today I Learn / 주피터 노트북 포스팅</title>
-      <link>/2019/09/22/today-i-learn/</link>
+      <link>https://rhyeu.netlify.com/2019/09/22/today-i-learn/</link>
       <pubDate>Sun, 22 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/09/22/today-i-learn/</guid>
+      <guid>https://rhyeu.netlify.com/2019/09/22/today-i-learn/</guid>
       <description>출처 : https://www.timlrx.com/2018/03/25/uploading-jupyter-notebook-files-to-blogdown/ blogdown으로 블로그를 운영하는데 아쉬운 건 테마, 폰트 등 수도 없지만 더 아쉬운건 파이썬을 쓰기 번거롭다는 것이다. ‘reticulate’</description>
     </item>
     
     <item>
       <title>Today I Learn / python tip (print, list, 진법, 몫, 나머지)</title>
-      <link>/2019/09/19/today-i-learn/</link>
+      <link>https://rhyeu.netlify.com/2019/09/19/today-i-learn/</link>
       <pubDate>Thu, 19 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/09/19/today-i-learn/</guid>
+      <guid>https://rhyeu.netlify.com/2019/09/19/today-i-learn/</guid>
       <description>library(reticulate) Sys.setlocale(&amp;#39;LC_ALL&amp;#39;,&amp;#39;C&amp;#39;) ## [1] &amp;quot;C&amp;quot; 요새 코드업 기초 100제를 풀어보고 있는데 헷갈리는 것들을 정리! 1. sep 옵션 in python 파이썬에서 여러 개를 출력할 때 sep 옵션을 걸 수 있음 print(1920, 1080, sep = &amp;#39;x&amp;#39;) ## 1920x1080 print(&amp;#39;Hello&amp;#39;, &amp;#39;Python&amp;#39;,</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>/about/</link>
+      <link>https://rhyeu.netlify.com/about/</link>
       <pubDate>Mon, 09 Sep 2019 22:27:51 -0700</pubDate>
       
-      <guid>/about/</guid>
+      <guid>https://rhyeu.netlify.com/about/</guid>
       <description>류성균의 블로그 입니다. 학력 석사 : 중앙대학교 대학원 통계학 석사과정 관심 분야 베이지안 모델링 클러스터링 머신러닝 일반 학사 : 중앙대학교 공공인재학부(행정</description>
     </item>
     
     <item>
       <title>Today I Learn / cor2cov</title>
-      <link>/2019/09/10/today-i-learn/</link>
+      <link>https://rhyeu.netlify.com/2019/09/10/today-i-learn/</link>
       <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/09/10/today-i-learn/</guid>
+      <guid>https://rhyeu.netlify.com/2019/09/10/today-i-learn/</guid>
       <description>cor2cov 함수 Gaussian mixture 시뮬레이션을 하는데 적절한 공분산을 컨트롤 하기 힘들었는데 적당한 함수를 발견! ‘MBESS’, ‘stremo’ 등 여러 패키지에서 제공하는데 일</description>
     </item>
     
     <item>
       <title>Today I Learn - GBHC 등</title>
-      <link>/2019/08/20/today-i-learn/</link>
+      <link>https://rhyeu.netlify.com/2019/08/20/today-i-learn/</link>
       <pubDate>Tue, 20 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/08/20/today-i-learn/</guid>
+      <guid>https://rhyeu.netlify.com/2019/08/20/today-i-learn/</guid>
       <description>Gaussian assumption을 사용한 BHC도 존재 (Bayesian Hierarchical Clustering with a Gaussian Conjugate Prior, Sirinukunwattana, Savage and Pajpoot, 2012) noise에 좀 더 Robust discretizing을 하는 시간을 줄일 수 있음 overepresentation 문제를</description>
     </item>
     
     <item>
       <title>Today I learn - eval(parse)</title>
-      <link>/2019/07/30/today-i-learn/</link>
+      <link>https://rhyeu.netlify.com/2019/07/30/today-i-learn/</link>
       <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/07/30/today-i-learn/</guid>
+      <guid>https://rhyeu.netlify.com/2019/07/30/today-i-learn/</guid>
       <description>eval(parse(text = )) 사용 법 반복문 사용할 때 항상 eval + parse를 어떻게 하는 지 애먹었는데 나를 위해 예문과 함께 정리해봄. 중요한 건 eval(parse(text = &#34; &#34; )) 괄호 안에 text의 형태로 들</description>
     </item>
     
     <item>
       <title>Today I Learn - BHC 장/단점</title>
-      <link>/2019/07/29/today-i-learn/</link>
+      <link>https://rhyeu.netlify.com/2019/07/29/today-i-learn/</link>
       <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/07/29/today-i-learn/</guid>
+      <guid>https://rhyeu.netlify.com/2019/07/29/today-i-learn/</guid>
       <description>BHC의 장점 1. predictive distribution을 활용하기 좋다. 1. 따로 cluster의 수나 distance measure를 고려하지 않아도 좋다. 1. outlier에 r</description>
     </item>
     
     <item>
       <title>Today I learn - &#39;ggfortify&#39; 패키지</title>
-      <link>/2019/06/28/today-i-learn/</link>
+      <link>https://rhyeu.netlify.com/2019/06/28/today-i-learn/</link>
       <pubDate>Fri, 28 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/06/28/today-i-learn/</guid>
+      <guid>https://rhyeu.netlify.com/2019/06/28/today-i-learn/</guid>
       <description>R에서는 ‘ggfortify’ 패키지를 사용하면, PCA와 일부 클러스터링 결과에 대해 시각화를 예쁘게 해볼 수 있다. https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html</description>
     </item>
     
     <item>
       <title>Today I learn - Broom / Stacking</title>
-      <link>/2019/06/13/today-i-learn/</link>
+      <link>https://rhyeu.netlify.com/2019/06/13/today-i-learn/</link>
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/06/13/today-i-learn/</guid>
+      <guid>https://rhyeu.netlify.com/2019/06/13/today-i-learn/</guid>
       <description>Broom glm, Regression tree, GAM 등에서 사용가능 - 심지어 데이터 프레임으로 output이 나옴 glance : 전체 퍼포먼스 tidy : 계수 augment : predicted value Stacking fitted value가 나오는 결로 디자인 matri</description>
     </item>
     
     <item>
       <title></title>
-      <link>/about/</link>
+      <link>https://rhyeu.netlify.com/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>https://rhyeu.netlify.com/about/</guid>
       <description>About/*! jQuery v1.11.3 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */!function(a,b){&#34;object&#34;==typeof module&amp;&amp;&#34;object&#34;==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error(&#34;jQuery requires a window with a document&#34;);return b(a)}:b(a)}(&#34;undefined&#34;!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h={},i=h.toString,j=h.hasOwnProperty,k={},l=&#34;1.11.3&#34;,m=function(a,b){return new m.fn.init(a,b)},n=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,o=/^-ms-/,p=/-([\da-z])/gi,q=function(a,b){return b.toUpperCase()};m.fn=m.prototype={jquery:l,constructor:m,selector:&#34;&#34;,length:0,toArray:function(){return d.call(this)},get:function(a){return null!=a?0a?this[a+this.length]:this[a]:d.call(this)},pushStack:function(a){var b=m.merge(this.constructor(),a);return b.prevObject=this,b.context=this.context,b},each:function(a,b){return m.each(this,a,b)},map:function(a){return this.pushStack(m.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(d.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(0a?b:0);return this.pushStack(c=0&amp;&amp;bc?[this[c]]:[])},end:function(){return this.prevObject||this.constructor(null)},push:f,sort:c.sort,splice:c.splice},m.extend=m.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for(&#34;boolean&#34;==typeof g&amp;&amp;(j=g,g=arguments[h]||{},h++),&#34;object&#34;==typeof g||m.isFunction(g)||(g={}),h===i&amp;&amp;(g=this,h--);ih;h++)if(null!=(e=arguments[h]))for(d in e)a=g[d],c=e[d],g!==c&amp;&amp;(j&amp;&amp;c&amp;&amp;(m.isPlainObject(c)||(b=m.isArray(c)))?(b?(b=!1,f=a&amp;&amp;m.isArray(a)?a:[]):f=a&amp;&amp;m.isPlainObject(a)?a:{},g[d]=m.extend(j,f,c)):void 0!==c&amp;&amp;(g[d]=c));return g},m.extend({expando:&#34;jQuery&#34;+(l+Math.random()).replace(/\D/g,&#34;&#34;),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return&#34;function&#34;===m.type(a)},isArray:Array.isArray||function(a){return&#34;array&#34;===m.type(a)},isWindow:function(a){return null!=a&amp;&amp;a==a.window},isNumeric:function(a){return!m.isArray(a)&amp;&amp;a-parseFloat(a)+1=0},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},isPlainObject:function(a){var b;if(!a||&#34;object&#34;!==m.type(a)||a.nodeType||m.isWindow(a))return!1;try{if(a.constructor&amp;&amp;!j.call(a,&#34;constructor&#34;)&amp;&amp;!j.call(a.constructor.prototype,&#34;isPrototypeOf&#34;))return!1}catch(c){return!1}if(k.ownLast)for(b in a)return j.call(a,b);for(b in a);return void 0===b||j.call(a,b)},type:function(a){return null==a?a+&#34;&#34;:&#34;object&#34;==typeof a||&#34;function&#34;==typeof a?h[i.call(a)]||&#34;object&#34;:typeof a},globalEval:function(b){b&amp;&amp;m.trim(b)&amp;&amp;(a.execScript||function(b){a.eval.call(a,b)})(b)},camelCase:function(a){return a.</description>
     </item>
     

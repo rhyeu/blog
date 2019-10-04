@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.58.1" />
 
 
-<title>Today I Learn - BHC 장/단점 - Rhyeu&#39;s blog</title>
-<meta property="og:title" content="Today I Learn - BHC 장/단점 - Rhyeu&#39;s blog">
+<title>Today I Learn / list 중복 없애기, - Rhyeu&#39;s blog</title>
+<meta property="og:title" content="Today I Learn / list 중복 없애기, - Rhyeu&#39;s blog">
 
 
   <link href='https://rhyeu.netlify.com/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -65,31 +65,48 @@
     <span class="article-duration">1 min read</span>
     
 
-    <h1 class="article-title">Today I Learn - BHC 장/단점</h1>
+    <h1 class="article-title">Today I Learn / list 중복 없애기,</h1>
 
     
-    <span class="article-date">2019-07-29</span>
+    <span class="article-date">2019-10-03</span>
     
 
     <div class="article-content">
       
 
 
-<div id="bhc-" class="section level3">
-<h3>BHC의 장점</h3>
-<pre><code>1. predictive distribution을 활용하기 좋다.
-
-1. 따로 cluster의 수나 distance measure를 고려하지 않아도 좋다.
-
-1. outlier에 robust하다. 
-
-1. DPMixture marginal likelihood의 lower bound 역할을 한다.          </code></pre>
+<div id="list--" class="section level3">
+<h3>list 중복 없애기</h3>
+<ul>
+<li>참조 : <a href="https://bluese05.tistory.com/13" class="uri">https://bluese05.tistory.com/13</a></li>
+</ul>
+<p>파이썬 리스트에서 중복을 없애기 위해서 이것저것 방법이 있겠지만 ‘set’ 자료형을 사용하면 쉽게 바꿀 수 있다.</p>
+<ul>
+<li>‘set’ 자료형의 특징은 아래와 같다.
+<ul>
+<li>중복을 허용하지 않는다</li>
+<li>원소간 순서가 없다.</li>
+</ul></li>
+</ul>
+<div id="section" class="section level4">
+<h4>예제</h4>
+<pre class="python"><code>a = [1,2,1,1,1,1,2,2,2,2,2,2,3,3,3,3]
+print(a)</code></pre>
+<pre><code>## [1, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3]</code></pre>
+<pre class="python"><code>a = list(set(a))
+print(a)</code></pre>
+<pre><code>## [1, 2, 3]</code></pre>
 </div>
-<div id="bhc--1" class="section level3">
-<h3>BHC의 단점</h3>
-<ol style="list-style-type: decimal">
-<li>Discretizing을 하는 과정에서 연산량이 많다.</li>
-</ol>
+</div>
+<div id="section-1" class="section level3">
+<h3>파이썬 2차원 배열 간단하게 생성하기</h3>
+<ul>
+<li>참고 : <a href="https://andrew0409.tistory.com/53" class="uri">https://andrew0409.tistory.com/53</a></li>
+</ul>
+<pre class="python"><code>space = [[0 for col in range(10)] for row in range(10)]
+
+print(space)</code></pre>
+<pre><code>## [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]</code></pre>
 </div>
 
     </div>

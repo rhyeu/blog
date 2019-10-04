@@ -3,157 +3,172 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/categories/</loc>
+    <loc>https://rhyeu.netlify.com/categories/</loc>
+    <lastmod>2019-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rhyeu.netlify.com/post/</loc>
+    <lastmod>2019-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rhyeu.netlify.com/tags/python-2-dimensional-array/</loc>
+    <lastmod>2019-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rhyeu.netlify.com/tags/python-list/</loc>
+    <lastmod>2019-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rhyeu.netlify.com/</loc>
+    <lastmod>2019-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rhyeu.netlify.com/tags/</loc>
+    <lastmod>2019-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rhyeu.netlify.com/categories/today-i-learn/</loc>
+    <lastmod>2019-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rhyeu.netlify.com/2019/10/03/today-i-learn/</loc>
+    <lastmod>2019-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rhyeu.netlify.com/tags/python/</loc>
     <lastmod>2019-09-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/</loc>
+    <loc>https://rhyeu.netlify.com/2019/09/26/today-i-learn/</loc>
     <lastmod>2019-09-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/python/</loc>
-    <lastmod>2019-09-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2019-09-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-09-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/today-i-learn/</loc>
-    <lastmod>2019-09-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2019/09/26/today-i-learn/</loc>
-    <lastmod>2019-09-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/jupyter-notebook/</loc>
+    <loc>https://rhyeu.netlify.com/tags/jupyter-notebook/</loc>
     <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/09/22/today-i-learn-example/</loc>
+    <loc>https://rhyeu.netlify.com/2019/09/22/today-i-learn-example/</loc>
     <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/09/22/today-i-learn/</loc>
+    <loc>https://rhyeu.netlify.com/2019/09/22/today-i-learn/</loc>
     <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/09/19/today-i-learn/</loc>
+    <loc>https://rhyeu.netlify.com/2019/09/19/today-i-learn/</loc>
     <lastmod>2019-09-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://rhyeu.netlify.com/about/</loc>
     <lastmod>2019-09-09T22:27:51-07:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/covariance/</loc>
+    <loc>https://rhyeu.netlify.com/tags/covariance/</loc>
     <lastmod>2019-09-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/multivariate/</loc>
+    <loc>https://rhyeu.netlify.com/tags/multivariate/</loc>
     <lastmod>2019-09-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/positive-definite/</loc>
+    <loc>https://rhyeu.netlify.com/tags/positive-definite/</loc>
     <lastmod>2019-09-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/simulation-study/</loc>
+    <loc>https://rhyeu.netlify.com/tags/simulation-study/</loc>
     <lastmod>2019-09-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/statistics/</loc>
+    <loc>https://rhyeu.netlify.com/tags/statistics/</loc>
     <lastmod>2019-09-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/09/10/today-i-learn/</loc>
+    <loc>https://rhyeu.netlify.com/2019/09/10/today-i-learn/</loc>
     <lastmod>2019-09-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/bhc/</loc>
+    <loc>https://rhyeu.netlify.com/tags/bhc/</loc>
     <lastmod>2019-08-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/clustering/</loc>
+    <loc>https://rhyeu.netlify.com/tags/clustering/</loc>
     <lastmod>2019-08-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/08/20/today-i-learn/</loc>
+    <loc>https://rhyeu.netlify.com/2019/08/20/today-i-learn/</loc>
     <lastmod>2019-08-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/for/</loc>
+    <loc>https://rhyeu.netlify.com/tags/for/</loc>
     <lastmod>2019-07-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/r/</loc>
+    <loc>https://rhyeu.netlify.com/tags/r/</loc>
     <lastmod>2019-07-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/07/30/today-i-learn/</loc>
+    <loc>https://rhyeu.netlify.com/2019/07/30/today-i-learn/</loc>
     <lastmod>2019-07-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/07/29/today-i-learn/</loc>
+    <loc>https://rhyeu.netlify.com/2019/07/29/today-i-learn/</loc>
     <lastmod>2019-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/06/28/today-i-learn/</loc>
+    <loc>https://rhyeu.netlify.com/2019/06/28/today-i-learn/</loc>
     <lastmod>2019-06-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/visualization/</loc>
+    <loc>https://rhyeu.netlify.com/tags/visualization/</loc>
     <lastmod>2019-06-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/broom/</loc>
+    <loc>https://rhyeu.netlify.com/tags/broom/</loc>
     <lastmod>2019-06-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/stacking/</loc>
+    <loc>https://rhyeu.netlify.com/tags/stacking/</loc>
     <lastmod>2019-06-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/06/13/today-i-learn/</loc>
+    <loc>https://rhyeu.netlify.com/2019/06/13/today-i-learn/</loc>
     <lastmod>2019-06-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://rhyeu.netlify.com/about/</loc>
     <priority>0</priority>
   </url>
   
