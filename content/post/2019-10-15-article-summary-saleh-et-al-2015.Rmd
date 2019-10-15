@@ -9,15 +9,6 @@ tags:
   - Qaulity control
   - Phase 1
   - estimate error
-  
-fig_height: 6
-fig_width: 10
-highlight: textmate
-theme: cosmo
-toc: yes
-toc_depth: 3
-toc_float: yes
-fontsize : 12pt
 ---
 
 ## "The Difficulty in Designing Shewhart $\bar{X}$ and X Control Charts with Estimated Parameters(Saleh et al., 2015)"
@@ -124,12 +115,15 @@ $$\hat{\sigma_4} = c_4(\nu + 1) S_{pooled} \quad \&  \quad \hat{ \sigma_5} =  S_
   
 - 따라서, 적절한 크기의 샘플이 사용되었는지 알기 위해 $SDARL$을 활용할 수 있음.  
   - $SDARL$이 작으면 작을 수록, 적절한 크기의 샘플이 Phase 1에 사용,
-  - Phase 1의 결과를 신뢰할 만함.
-    
+  - Phase 1의 결과를 신뢰할 만함.  
+ 
+&nbsp; 
+
 - **논문 목표 : Phase 1에 어느 정도의 크기의 샘플이 활용되어야 AARL은 이상적인 수치와 가까워지고, SDARL도 작아질까?**  
   - Zhang et al.(2016)은 $SDARL$이 목표로 하는 관리상태 $ARL$의 10% 이내가 되어야 한다고 봄.
   - **논문의 결과 : 위의 목표는 달성하기 어렵다.**  
-  
+
+&nbsp;   
   
 - 실험 설계
   - 추정 평균 : $\bar{\bar{X}}$
@@ -144,7 +138,7 @@ $$\hat{\sigma_4} = c_4(\nu + 1) S_{pooled} \quad \&  \quad \hat{ \sigma_5} =  S_
 
 
 - 적어도 $m = 100$은 되어야.  
-- 다른 $\hat{\sigma}$들에 비해, $\hat{\sigma_4}$가 돋보임.  
+- 다른 $\hat{\sigma}$들에 비해, $\hat{\sigma_4}$가 돋보임.
 - m이 커지면 커질 수록 이상값에 수렴하고 추정치간의 차이도 줄어듦.  
 
  ![](https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table2.PNG){ width=80% }
@@ -220,26 +214,26 @@ where $ i = 1,2, \cdots , m$
 ### 6. Concluding Remarks
 
 - 본 논문에서는 $SDARL$을 평가지표로 사용하여 추정된 모수를 활용한 $\bar{X}$ 관리도와 $X$ 관리도를 평가했다.
-  - 다양한 $\hat{\sigma}$들 중 $\hat{\sigma}_4$가 가장 좋은 결과를 보임.
+  - 다양한 $\hat{\sigma}$들 중 $\hat{\sigma}_4$가 가장 좋은 결과를 보임.  
 
 - $\bar{X}$ 관리도 
   - 추정된 모수를 활용한 관리도의 성능이 이상적인 관리도 차트와 비슷하기 위해서는 비현실적으로 많은 샘플이 모수 추정에 활용되어야 한다.
   - 이런 경향은 EWMA 관리도와 CUSUM 관리도에서 더 강하게 나타남.
-  - 이러한 경향의 원인은 실제로는 알고 있다고 가정한 모수들이 실제로는 오류를 가지고 있는 추정값이기 때문
+  - 이러한 경향의 원인은 실제로는 알고 있다고 가정한 모수들이 실제로는 오류를 가지고 있는 추정값이기 때문  
 
 - 다양한 다른 방법들
   - Jones and Steiner(2012), Gandy and Kvaloy(2013)
     - **??** $ARL_0$이 특정값의 특정 확률보다 크도록 하는 관리한계를 설정할 것을 제안?
   (They recommended a method for determining control limits such that the ARL0 is greater than a specified value with a specified probability.)
-    - 이렇게 하면 추정된 모수를 사용하기 때문에 발생할 수 있는 낮은 $ARL_0$을 방지할 수 있게 함.
-
+    - 이렇게 하면 추정된 모수를 사용하기 때문에 발생할 수 있는 낮은 $ARL_0$을 방지할 수 있게 함.  
+  
   - The Bootstrap method
-    - **??** 모수를 알고 있다고 가정했을 때와 추정된 모수를 사용하여 ARL 차트를 비교하는 것보다 설계 기준에 따라 설계된 차트 끼리 비교하는게 더 유용함.
-    
+    - **??** 모수를 알고 있다고 가정했을 때와 추정된 모수를 사용하여 ARL 차트를 비교하는 것보다 설계 기준에 따라 설계된 차트 끼리 비교하는게 더 유용함.  
+      
   - Outliers의 영향
     - Outliers의 영향을 줄이기 위해 단순 평균을 하기보단 pooled variance를 활용하는 것이 좋음.
-    - Range based 방법보다 pooled based 방법을 이용한 추정이 efficient, 특히 $\hat{\sigma}_4$
-
+    - Range based 방법보다 pooled based 방법을 이용한 추정이 efficient, 특히 $\hat{\sigma}_4$  
+  
   - Self-starting control chart (Pignatiello, 2001 등)
     - 처음에는 작은 크기의 샘플로 관리한계를 설정하고 이상을 탐색
     - 반복을 통해 관리상태인 샘플은 관리한계를 설정하는 데에 활용 (효율적!)
