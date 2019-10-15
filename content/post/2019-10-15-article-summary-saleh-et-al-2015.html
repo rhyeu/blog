@@ -25,40 +25,47 @@ fontsize : 12pt
 yes
 </div>
 
-<div id="the-diculty-in-designing-shewhart-barx-and-x-control-charts-with-estimated-parameterssaleh-et-al.-2015" class="section level2">
-<h2>“The Diculty in Designing Shewhart <span class="math inline">\(\bar{X}\)</span> and X Control Charts with Estimated Parameters(Saleh et al., 2015)”</h2>
+<div id="the-difficulty-in-designing-shewhart-barx-and-x-control-charts-with-estimated-parameterssaleh-et-al.-2015" class="section level2">
+<h2>“The Difficulty in Designing Shewhart <span class="math inline">\(\bar{X}\)</span> and X Control Charts with Estimated Parameters(Saleh et al., 2015)”</h2>
 <hr />
 <div id="introduction" class="section level3">
 <h3>1. Introduction</h3>
 <ul>
-<li><p><span class="math inline">\(\bar{X}\)</span> Shewhart 관리도는 공정 평균을 관리하는 데에 가장 많이 사용되는 방법이다. 실무에서 공정 데이터의 모수는 알 수 없기 때문에 추정의 단계가 필요</p>
-<ol style="list-style-type: decimal">
-<li>Phase 1 - 모수 추정 단계</li>
-</ol>
+<li><span class="math inline">\(\bar{X}\)</span> Shewhart 관리도는 공정 평균을 관리하는 데에 가장 많이 사용되는 방법이다. 실무에서 공정 데이터의 모수는 알 수 없기 때문에 추정의 단계가 필요
+<ul>
+<li>Phase 1 - 모수 추정 단계
 <ul>
 <li>크기 <span class="math inline">\(n\)</span>의 <span class="math inline">\(m\)</span> 개의 샘플 데이터를 통해 관리 상태에서의 모수를 추정</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Phase 2 - 이상 탐지</li>
-</ol>
-<ul>
-<li>추정된 모수를 가지고 공정의 모수가 바뀌는 것을 빠르게 탐지하고자 함.</li>
 </ul></li>
-<li><p>추정 오류로 인해 Phase 2 관리도의 performance에 대해 많은 우려가 존재.(Ghosh et al., 1981 등)</p></li>
+<li>Phase 2 - 이상 탐지
+<ul>
+<li>추정된 모수를 가지고 공정의 모수가 바뀌는 것을 빠르게 탐지하고자 함.<br />
+</li>
+</ul></li>
+<li>추정 오류로 인해 Phase 2 관리도의 performance에 대해 많은 우려가 존재.(Ghosh et al., 1981 등)</li>
+</ul></li>
+</ul>
+<p> </p>
+<ul>
 <li><strong>Phase 1에서 사용되는 데이터의 크기는 ‘공정 단계 모수를 얼마나 잘 추정할 수 있는지’에 영향을 미치고, 이는 ’Phase 2 관리도의 performance와도 직결된다.’</strong>
 <ul>
-<li><p>Phase 1에서 추정된 모수가 실제 모집단의 모수라고 간주하기 때문에</p></li>
+<li>Phase 1에서 추정된 모수가 실제 모집단의 모수라고 간주하기 때문에
+<ul>
 <li>전통적으로는 <span class="math inline">\(m\)</span> : 2~30 / <span class="math inline">\(n\)</span> : 4~6 정도를 사용</li>
+</ul></li>
 <li>이정도 크기를 가지고는 <span class="math inline">\(\bar{X}\)</span> 관리도를 사용할 때 관리 상태 모수에 대한 적절한 추정을 하기 어렵다.(Quensenberry, 1993)
 <ul>
 <li><span class="math inline">\(m = 100\)</span> / <span class="math inline">\(n = 5\)</span></li>
 <li><span class="math inline">\(m = 400/(n-1)\)</span> / <span class="math inline">\(n &gt; 1\)</span></li>
 </ul></li>
 </ul></li>
+</ul>
+<p> </p>
+<ul>
 <li>관리도의 performance는 run-length distribution을 통해 평가.
 <ul>
 <li><span class="math inline">\(ARL = E(Run-Length)\)</span></li>
-<li><p><span class="math inline">\(SDRL = SD(Run-Length\)</span></p></li>
+<li><span class="math inline">\(SDRL = SD(Run-Length\)</span></li>
 <li>모수를 알고 있다면 ARL, SDRL은 상수</li>
 <li>But 모수를 추정하고 이에 따라 관리한계를 정했다면 ARL, SDLR은 확률변수가 된다.
 <ul>
@@ -72,11 +79,14 @@ yes
 </ul></li>
 </ul></li>
 </ul></li>
+</ul>
+<p> </p>
+<ul>
 <li>practitioner-to-practitioner :
 <ul>
 <li>Phase 1 에서 모수를 추정할 때마다 다른 data를 사용하게 되기 때문에 추정값 또한 달라진다.</li>
 <li>다른 모수를 가지고 관리한계를 설정하기 때문에 <span class="math inline">\(ARL_0\)</span> 값도 달라진다.</li>
-<li><p>Shewart <span class="math inline">\(S\)</span> and <span class="math inline">\(S^2\)</span> 관리도에 대한 연구(Mongomery, 2013 등)에서 전통적으로 사용되던 샘플 사이즈로 도출된 조건부 오경보확률은 이론적으로 구해진 값과 다르고, 이론적으로 구해진 값에 도달하기 위해서는 더 많은 데이터를 사용해야 된다고 지적.</p></li>
+<li>Shewart <span class="math inline">\(S\)</span> and <span class="math inline">\(S^2\)</span> 관리도에 대한 연구(Mongomery, 2013 등)에서 전통적으로 사용되던 샘플 사이즈로 도출된 조건부 오경보확률은 이론적으로 구해진 값과 다르고, 이론적으로 구해진 값에 도달하기 위해서는 더 많은 데이터를 사용해야 된다고 지적.</li>
 <li><span class="math inline">\(SDARL\)</span>
 <ul>
 <li>오른쪽으로 치우친 분포</li>
@@ -84,16 +94,19 @@ yes
 <li><span class="math inline">\(SDARL = 0\)</span> : 모수를 알고 있다고 봐도 됨.</li>
 <li><span class="math inline">\(SDARL\)</span>가 매우 큼</li>
 </ul></li>
-<li><p>논문의 목표</p></li>
+</ul></li>
 </ul>
+<p> </p>
+<ul>
+<li><p>논문의 목표</p>
 <p><strong>To evaluate the <span class="math inline">\(\bar{X}\)</span> and X-charts while considering the practitioner-to-practitioner variability and to assess the effect of the amount of phase I data using the SDARL metric.</strong></p></li>
 </ul>
 <hr />
 </div>
 <div id="brief-background-information-on-shewhart-barx-charts" class="section level3">
-<h3>2. Brief Background Information on Shewhart <span class="math inline">\(\bar{X}-Charts\)</span></h3>
+<h3>2. Brief Background Information on Shewhart <span class="math inline">\(\bar{X}\)</span>-Charts</h3>
 <p><span class="math display">\[(X_{i1},X_{i2},\cdots,X_{in} )\]</span>
-where i : sample / j : observation</p>
+where <span class="math inline">\(i\)</span> : sample / <span class="math inline">\(j\)</span> : observation</p>
 <ul>
 <li><p>각각의 샘플은 독립적으로 추출</p></li>
 <li><p>샘플 내 관측치는 평균이 <span class="math inline">\(\mu\)</span>이고 표준편차가 <span class="math inline">\(\sigma\)</span>인 iid에서 추출</p></li>
@@ -120,7 +133,8 @@ where <span class="math inline">\(i = 1, 2, \cdots , m\)</span></p></li>
 <ul>
 <li><p>unbiased
 <span class="math display">\[\hat{\sigma_1} = \frac{\bar{R}}{d_2(n)}, \quad \hat{\sigma_2} = \frac{\bar{S}}{C_4(n)}, \quad \hat{\sigma_3} = \frac{S_{pooled}}{C_4(\nu+1)}, \qquad (4) \]</span>
-where <span class="math inline">\(\bar{R} = (\sum_{i=1}^m R_i) / m, \, \bar{S} = (\sum_{i=1}^m S_i) / m, \, S_{pooled} = ((\sum_{i=1}^m S_i^2) / m)^{1/2}, \, v = m(n-1)\)</span></p></li>
+where <span class="math inline">\(\bar{R} = (\sum_{i=1}^m R_i) / m, \, \bar{S} = (\sum_{i=1}^m S_i) / m, \,\)</span>
+<span class="math inline">\(S_{pooled} = ((\sum_{i=1}^m S_i^2) / m)^{1/2}, \, v = m(n-1)\)</span></p></li>
 <li><p>biased
 <span class="math display">\[\hat{\sigma_4} = c_4(\nu + 1) S_{pooled} \quad \&amp;  \quad \hat{ \sigma_5} =  S_{pooled} \qquad (5)\]</span></p></li>
 </ul></li>
@@ -134,7 +148,7 @@ where <span class="math inline">\(\bar{R} = (\sum_{i=1}^m R_i) / m, \, \bar{S} =
 <div id="barx-control-chart-performance-assessment" class="section level3">
 <h3>4. <span class="math inline">\(\bar{X}\)</span> Control Chart Performance Assessment</h3>
 <ul>
-<li>관리도의 성능을 평가하기 위해 <span class="math inline">\(AARL\)</span>를 사용하지만, Phase 1에 사용하는 데이터에 따라 <span class="math inline">\(AARL_0\)</span>은 달라질 수 있음.</li>
+<li><p>관리도의 성능을 평가하기 위해 <span class="math inline">\(AARL\)</span>를 사용하지만, Phase 1에 사용하는 데이터에 따라 <span class="math inline">\(AARL_0\)</span>은 달라질 수 있음.</p></li>
 <li>따라서, 적절한 크기의 샘플이 사용되었는지 알기 위해 <span class="math inline">\(SDARL\)</span>을 활용할 수 있음.
 <ul>
 <li><span class="math inline">\(SDARL\)</span>이 작으면 작을 수록, 적절한 크기의 샘플이 Phase 1에 사용,</li>
@@ -149,46 +163,51 @@ where <span class="math inline">\(\bar{R} = (\sum_{i=1}^m R_i) / m, \, \bar{S} =
 <ul>
 <li>추정 평균 : <span class="math inline">\(\bar{\bar{X}}\)</span></li>
 <li>추정 표본분산 : (4) &amp; (5)</li>
-<li><span class="math inline">\(m\)</span> : 20~500</li>
+<li><span class="math inline">\(m\)</span> : 20~5000</li>
 <li><span class="math inline">\(n\)</span> : 5</li>
 <li><span class="math inline">\(L = 3\)</span> / <span class="math inline">\(ARL_0 = 370\)</span></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table1.PNG" /></p></li>
-<li>적어도 <span class="math inline">\(m = 100\)</span>은 되어야.</li>
-<li>다른 <span class="math inline">\(\hat{\sigma}\)</span>들에 비해, <span class="math inline">\(\hat{\sigma_4}\)</span>가 돋보임.</li>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table1.PNG" style="width:80.0%" /></p></li>
+<li>적어도 <span class="math inline">\(m = 100\)</span>은 되어야.<br />
+</li>
+<li>다른 <span class="math inline">\(\hat{\sigma}\)</span>들에 비해, <span class="math inline">\(\hat{\sigma_4}\)</span>가 돋보임.<br />
+</li>
 <li><p>m이 커지면 커질 수록 이상값에 수렴하고 추정치간의 차이도 줄어듦.</p></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table2.PNG" /></p>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table2.PNG" style="width:80.0%" /></p>
 <ul>
-<li><span class="math inline">\(m = 100\)</span>일 때도, <span class="math inline">\(SDARL\)</span>는 아직 큼.</li>
-<li>Zhang et al.(2016)의 기준을 따르려면 <span class="math inline">\(m\)</span>이 1200은 되어야.</li>
+<li><span class="math inline">\(m = 100\)</span>일 때도, <span class="math inline">\(SDARL\)</span>는 아직 큼.<br />
+</li>
+<li>Zhang et al.(2016)의 기준을 따르려면 <span class="math inline">\(m\)</span>이 1200은 되어야.<br />
+</li>
 <li>현실적으로 이상적인 값에 도달할 수 없음
 <ol style="list-style-type: decimal">
 <li>Phase 1에서 m = 100 ~ 1200을 사용하기엔 현실적으로 어렵</li>
 <li>Phase 1에서 현실적인 크기의 표본크기를 사용할 경우 정확하지 않음.</li>
 </ol></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure1.PNG" style="width:80.0%" /></p>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure1.PNG" style="width:60.0%" /></p>
 <ul>
 <li><p><span class="math inline">\(ARL_0\)</span>의 변동이 매우 큼</p>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure2.PNG" style="width:80.0%" /></p></li>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure2.PNG" style="width:60.0%" /></p></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure3.PNG" style="width:80.0%" /></p>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure3.PNG" style="width:60.0%" /></p>
 <ul>
 <li><span class="math inline">\(\hat{\sigma}\)</span>가 <span class="math inline">\(\hat{\mu}\)</span>보다 <span class="math inline">\(ARL\)</span>을 추정하는 데 더 영향을 많이 미침.(Figure 2,3)</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure4.PNG" style="width:80.0%" /></p>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure5.PNG" style="width:80.0%" /></p>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure4.PNG" style="width:60.0%" /></p>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure5.PNG" style="width:60.0%" /></p>
 <ul>
 <li><span class="math inline">\(m=50\)</span>, <span class="math inline">\(m=100\)</span>이 되어도 <span class="math inline">\(ARL_0\)</span> 변동이 매우 큰 것을 확인</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table3_1.PNG" /></p>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table3_2.PNG" /></p>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table3_1.PNG" style="width:80.0%" /></p>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table3_2.PNG" style="width:80.0%" /></p>
 <ul>
-<li>목표로 하는 <span class="math inline">\(ARL_0\)</span>이 커질수록 <span class="math inline">\(SDARL\)</span>가 <span class="math inline">\(ARL_0\)</span>의 10%가 되게 하는 <span class="math inline">\(m\)</span>의 값도 커짐.</li>
+<li>목표로 하는 <span class="math inline">\(ARL_0\)</span>이 커질수록 <span class="math inline">\(SDARL\)</span>가 <span class="math inline">\(ARL_0\)</span>의 10%가 되게 하는 <span class="math inline">\(m\)</span>의 값도 커짐.<br />
+</li>
 <li>다시말해, <span class="math inline">\(ARL_0\)</span>의 값이 커질수록 안정적인 추정값을 확보하기 위한 샘플 사이즈도 커짐.</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure6.PNG" /></p>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_figure6.PNG" style="width:80.0%" /></p>
 <ul>
 <li>Quesenberry(1993) &amp; Jones et al.(2001)
 <ul>
@@ -215,7 +234,7 @@ where $ i = 1,2, , m$</p></li>
 <span class="math display">\[\hat{\sigma}_0 = \frac{\bar{MR}}{1.128}\]</span>
 where <span class="math inline">\(\bar{MR} = (\sum_{i=2}^m MR_i) / (m-1)\)</span> &amp; <span class="math inline">\(MR_i = |X_i - X_{i-1}|\)</span></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table4.PNG" /></p>
+<p><img src="https://raw.githubusercontent.com/rhyeu/blog/master/content/img/Saleh_2015_table4.PNG" style="width:60.0%" /></p>
 <ul>
 <li>Quensenberry(1993)은 모수를 알고 있다고 가정했을 떄, 3<span class="math inline">\(\sigma\)</span> 한계의 <span class="math inline">\(X\)</span>-chart는 <span class="math inline">\(m=300\)</span>을 추천.
 <ul>

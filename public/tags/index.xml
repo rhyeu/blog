@@ -2,183 +2,183 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Rhyeu&#39;s blog</title>
-    <link>/tags/</link>
+    <link>https://rhyeu.netlify.com/tags/</link>
     <description>Recent content in Tags on Rhyeu&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Tue, 15 Oct 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://rhyeu.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>estimate error</title>
-      <link>/tags/estimate-error/</link>
+      <link>https://rhyeu.netlify.com/tags/estimate-error/</link>
       <pubDate>Tue, 15 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/estimate-error/</guid>
+      <guid>https://rhyeu.netlify.com/tags/estimate-error/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Phase 1</title>
-      <link>/tags/phase-1/</link>
+      <link>https://rhyeu.netlify.com/tags/phase-1/</link>
       <pubDate>Tue, 15 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/phase-1/</guid>
+      <guid>https://rhyeu.netlify.com/tags/phase-1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Qaulity control</title>
-      <link>/tags/qaulity-control/</link>
+      <link>https://rhyeu.netlify.com/tags/qaulity-control/</link>
       <pubDate>Tue, 15 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/qaulity-control/</guid>
+      <guid>https://rhyeu.netlify.com/tags/qaulity-control/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python 2 dimensional array</title>
-      <link>/tags/python-2-dimensional-array/</link>
+      <link>https://rhyeu.netlify.com/tags/python-2-dimensional-array/</link>
       <pubDate>Thu, 03 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/python-2-dimensional-array/</guid>
+      <guid>https://rhyeu.netlify.com/tags/python-2-dimensional-array/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python list</title>
-      <link>/tags/python-list/</link>
+      <link>https://rhyeu.netlify.com/tags/python-list/</link>
       <pubDate>Thu, 03 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/python-list/</guid>
+      <guid>https://rhyeu.netlify.com/tags/python-list/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python</title>
-      <link>/tags/python/</link>
+      <link>https://rhyeu.netlify.com/tags/python/</link>
       <pubDate>Thu, 26 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/python/</guid>
+      <guid>https://rhyeu.netlify.com/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>jupyter notebook</title>
-      <link>/tags/jupyter-notebook/</link>
+      <link>https://rhyeu.netlify.com/tags/jupyter-notebook/</link>
       <pubDate>Sun, 22 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/jupyter-notebook/</guid>
+      <guid>https://rhyeu.netlify.com/tags/jupyter-notebook/</guid>
       <description></description>
     </item>
     
     <item>
       <title>covariance</title>
-      <link>/tags/covariance/</link>
+      <link>https://rhyeu.netlify.com/tags/covariance/</link>
       <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/covariance/</guid>
+      <guid>https://rhyeu.netlify.com/tags/covariance/</guid>
       <description></description>
     </item>
     
     <item>
       <title>multivariate</title>
-      <link>/tags/multivariate/</link>
+      <link>https://rhyeu.netlify.com/tags/multivariate/</link>
       <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/multivariate/</guid>
+      <guid>https://rhyeu.netlify.com/tags/multivariate/</guid>
       <description></description>
     </item>
     
     <item>
       <title>positive definite</title>
-      <link>/tags/positive-definite/</link>
+      <link>https://rhyeu.netlify.com/tags/positive-definite/</link>
       <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/positive-definite/</guid>
+      <guid>https://rhyeu.netlify.com/tags/positive-definite/</guid>
       <description></description>
     </item>
     
     <item>
       <title>simulation study</title>
-      <link>/tags/simulation-study/</link>
+      <link>https://rhyeu.netlify.com/tags/simulation-study/</link>
       <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/simulation-study/</guid>
+      <guid>https://rhyeu.netlify.com/tags/simulation-study/</guid>
       <description></description>
     </item>
     
     <item>
       <title>statistics</title>
-      <link>/tags/statistics/</link>
+      <link>https://rhyeu.netlify.com/tags/statistics/</link>
       <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/statistics/</guid>
+      <guid>https://rhyeu.netlify.com/tags/statistics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>BHC</title>
-      <link>/tags/bhc/</link>
+      <link>https://rhyeu.netlify.com/tags/bhc/</link>
       <pubDate>Tue, 20 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/bhc/</guid>
+      <guid>https://rhyeu.netlify.com/tags/bhc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>clustering</title>
-      <link>/tags/clustering/</link>
+      <link>https://rhyeu.netlify.com/tags/clustering/</link>
       <pubDate>Tue, 20 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/clustering/</guid>
+      <guid>https://rhyeu.netlify.com/tags/clustering/</guid>
       <description></description>
     </item>
     
     <item>
       <title>for</title>
-      <link>/tags/for/</link>
+      <link>https://rhyeu.netlify.com/tags/for/</link>
       <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/for/</guid>
+      <guid>https://rhyeu.netlify.com/tags/for/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>/tags/r/</link>
+      <link>https://rhyeu.netlify.com/tags/r/</link>
       <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/r/</guid>
+      <guid>https://rhyeu.netlify.com/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Visualization</title>
-      <link>/tags/visualization/</link>
+      <link>https://rhyeu.netlify.com/tags/visualization/</link>
       <pubDate>Fri, 28 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/visualization/</guid>
+      <guid>https://rhyeu.netlify.com/tags/visualization/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Broom</title>
-      <link>/tags/broom/</link>
+      <link>https://rhyeu.netlify.com/tags/broom/</link>
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/broom/</guid>
+      <guid>https://rhyeu.netlify.com/tags/broom/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Stacking</title>
-      <link>/tags/stacking/</link>
+      <link>https://rhyeu.netlify.com/tags/stacking/</link>
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/stacking/</guid>
+      <guid>https://rhyeu.netlify.com/tags/stacking/</guid>
       <description></description>
     </item>
     
