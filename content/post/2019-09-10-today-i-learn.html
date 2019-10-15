@@ -15,15 +15,17 @@ tags:
 
 
 
-<div id="cor2cov-" class="section level4">
+<div id="cor2cov-함수" class="section level4">
 <h4>cor2cov 함수</h4>
 <p>Gaussian mixture 시뮬레이션을 하는데 적절한 공분산을 컨트롤 하기 힘들었는데 적당한 함수를 발견! ‘MBESS’, ‘stremo’ 등 여러 패키지에서 제공하는데 일단 버전이 높은 ’MBESS’를 사용해 보기로 함.</p>
 <ul>
 <li>사용법은 굉장히 간단. 그냥 만들고 싶은 공분산의 상관계수 행렬과 각 변수의 <span class="math inline">\(\sigma\)</span>만 입력해서 함수로 돌리면 됨.</li>
 <li>‘discrepancy’ 옵션은 있긴 한데 잘 모르겠음</li>
 </ul>
-<pre class="r"><code>library()
-cor = matrix(c(1, 0.1, 0,
+<pre class="r"><code>library()</code></pre>
+<pre><code>## Warning in library(): 라이브러리 &#39;C:/Users/data_science_lab0/Documents/R/
+## win-library/3.6&#39;는 아무런 패키지도 포함하지 않습니다</code></pre>
+<pre class="r"><code>cor = matrix(c(1, 0.1, 0,
                0.1, 1, 0.8,
                0, 0.8, 1), ncol=3)
 sd = c(sqrt(3),sqrt(5),sqrt(10))
