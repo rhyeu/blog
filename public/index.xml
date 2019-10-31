@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Today I Learn / R aggreagate 함수</title>
+      <link>https://rhyeu.netlify.com/2019/10/31/today-i-learn-/-r-aggreagate-%ED%95%A8%EC%88%98/</link>
+      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://rhyeu.netlify.com/2019/10/31/today-i-learn-/-r-aggreagate-%ED%95%A8%EC%88%98/</guid>
+      <description>출처 : http://blog.naver.com/PostView.nhn?blogId=coder1252&amp;amp;logNo=221294821930&amp;amp;parentCategoryNo=&amp;amp;categoryNo=6&amp;amp;viewDate=&amp;amp;isShowPopularPosts=true&amp;amp;from=search 엔간한 데이터 요약과 정리는 dplyr 동사들로 할 수 있지만, ’aggregate’를 사용하면 더 깔끔한 듯. 매번 찾아보다가 정말 잘 정리된 블로그가 있어 참고</description>
+    </item>
+    
+    <item>
       <title>Article summary - Saleh et al., 2015</title>
       <link>https://rhyeu.netlify.com/2019/10/15/article-summary-saleh-et-al-2015/</link>
       <pubDate>Tue, 15 Oct 2019 00:00:00 +0000</pubDate>
