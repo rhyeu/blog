@@ -50,7 +50,7 @@ mtcars %>% aggregate(by = list(cylStandard = mtcars$cyl,
 aggregate('함수를 적용하고자 하는 컬럼'~'기준이 되는 컬럼', data, FUN)
 ```
 
-#### 2.1. one to one 대응응
+#### 2.1. one to one 대응
 - formula 꼴에서는 '%>%'을 사용하지 못하는 듯
 ```{r}
 aggregate(wt~cyl, data = mtcars, mean)
