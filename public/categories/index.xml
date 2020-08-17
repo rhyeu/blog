@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Rhyeu&#39;s blog</title>
-    <link>https://rhyeu.netlify.com/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Rhyeu&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 31 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://rhyeu.netlify.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Tips</title>
-      <link>https://rhyeu.netlify.com/categories/tips/</link>
-      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
+      <title>Today I learn</title>
+      <link>/categories/today-i-learn/</link>
+      <pubDate>Sun, 14 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rhyeu.netlify.com/categories/tips/</guid>
+      <guid>/categories/today-i-learn/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Today I learn</title>
-      <link>https://rhyeu.netlify.com/categories/today-i-learn/</link>
+      <title>Tips</title>
+      <link>/categories/tips/</link>
       <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://rhyeu.netlify.com/categories/today-i-learn/</guid>
+      <guid>/categories/tips/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Aticle Summary</title>
-      <link>https://rhyeu.netlify.com/categories/aticle-summary/</link>
+      <link>/categories/aticle-summary/</link>
       <pubDate>Tue, 15 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://rhyeu.netlify.com/categories/aticle-summary/</guid>
+      <guid>/categories/aticle-summary/</guid>
       <description></description>
     </item>
     
