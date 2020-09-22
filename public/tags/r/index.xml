@@ -6,10 +6,19 @@
     <description>Recent content in R on Rhyeu&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 14 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>xgboost in tidymodel</title>
+      <link>/2020/09/10/xgboost-in-tidymodel/</link>
+      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/09/10/xgboost-in-tidymodel/</guid>
+      <description># install.packages(c(&amp;quot;AmesHousing&amp;quot;, &amp;quot;janitor&amp;quot;, &amp;quot;dplyr&amp;quot;, &amp;quot;rsample&amp;quot;, &amp;quot;recipes&amp;quot;, &amp;quot;parsnip&amp;quot;, &amp;quot;tune&amp;quot;, &amp;quot;dials&amp;quot;, &amp;quot;workflows&amp;quot;, &amp;quot;yardstick&amp;quot;, &amp;quot;doParallel&amp;quot;)) # data library(AmesHousing) # data cleaning library(janitor) ## ## 다음의 패키지를 부착합니다: &amp;#39;janitor&amp;#39; ## The following objects are masked from &amp;#39;package:stats&amp;#39;: ## ## chisq.test, fisher.test # data prep library(dplyr) ## ## 다음의 패키지를 부착합니다: &amp;#39;dplyr&amp;#39; ## The following</description>
+    </item>
     
     <item>
       <title>R 버전 바뀔 때마다 패키지 업데이트</title>

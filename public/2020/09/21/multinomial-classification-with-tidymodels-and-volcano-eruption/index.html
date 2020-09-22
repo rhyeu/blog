@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.74.3" />
+
+
+<title>Multinomial classification with tidymodels and volcano eruption - Rhyeu&#39;s blog</title>
+<meta property="og:title" content="Multinomial classification with tidymodels and volcano eruption - Rhyeu&#39;s blog">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rhyeu/blog">GitHub</a></li>
+    
+    <li><a href="https://www.kaggle.com/srhyeu">Kaggle</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">5 min read</span>
+    
+
+    <h1 class="article-title">Multinomial classification with tidymodels and volcano eruption</h1>
+
+    
+    <span class="article-date">2020-09-21</span>
+    
+
+    <div class="article-content">
+      
+
+
+<ul>
+<li>reference : <a href="https://juliasilge.com/blog/multinomial-volcano-eruptions/" class="uri">https://juliasilge.com/blog/multinomial-volcano-eruptions/</a></li>
+</ul>
+<pre class="r"><code># install.packages(&quot;maps&quot;)
+library(knitr)
+
+knitr::opts_chunk$set(cache = T, warning = F,
+                     message = F, echo = T, dpi = 180,
+                     fig.width = 8, fig.height = 5)
+library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## √ ggplot2 3.3.2     √ purrr   0.3.4
+## √ tibble  3.0.3     √ dplyr   1.0.2
+## √ tidyr   1.1.2     √ stringr 1.4.0
+## √ readr   1.3.1     √ forcats 0.5.0</code></pre>
+<pre><code>## -- Conflicts ---------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(maps)</code></pre>
+<pre><code>## 
+## 다음의 패키지를 부착합니다: &#39;maps&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     map</code></pre>
+<pre class="r"><code>library(vip)</code></pre>
+<pre><code>## 
+## 다음의 패키지를 부착합니다: &#39;vip&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:utils&#39;:
+## 
+##     vi</code></pre>
+<pre class="r"><code>library(ranger)</code></pre>
+<div id="explore-the-data" class="section level2">
+<h2>Explore the data</h2>
+<p>Our modeling goal is to predict the <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md">type of volcano from this week’s #TidyTuesday dataset</a> based on other volcano characteristics like latitude, longitude, tectonic setting, etc. There are more than just two types of volcanoes, so this is an example of multiclass or multinomial classification instead of binary classification. Let’s use a random forest model, because this type of model performs well with defaults.</p>
+<pre class="r"><code>volcano_raw &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv&#39;)
+
+volcano_raw %&gt;%
+  count(primary_volcano_type, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 26 x 2
+##    primary_volcano_type     n
+##    &lt;chr&gt;                &lt;int&gt;
+##  1 Stratovolcano          353
+##  2 Stratovolcano(es)      107
+##  3 Shield                  85
+##  4 Volcanic field          71
+##  5 Pyroclastic cone(s)     70
+##  6 Caldera                 65
+##  7 Complex                 46
+##  8 Shield(s)               33
+##  9 Submarine               27
+## 10 Lava dome(s)            26
+## # ... with 16 more rows</code></pre>
+<p>Well, that’s probably <em>too</em> many types of volcanoes for us to build a model for, especially with just 958 examples. Let’s create a new <code>volcano_type</code> variable and build a model to distinguish between three volcano types:</p>
+<ul>
+<li>stratovolcano</li>
+<li>shield volcano</li>
+<li>everything else (other)</li>
+</ul>
+<p>While we use <code>transmute()</code> to create this new variable, let’s also select the variables to use in modeling, like the info about the tectonics around the volcano and the most important rock type.</p>
+<pre class="r"><code>volcano_df &lt;- volcano_raw %&gt;% 
+  transmute(volcano_type = case_when(str_detect(primary_volcano_type, &quot;Stratovolcano&quot;) ~ &quot;Stratovolcano&quot;,
+                                     str_detect(primary_volcano_type, &quot;Shield&quot;) ~ &quot;Shield&quot;,
+                                     TRUE ~ &quot;Other&quot;),
+            volcano_number, latitude, longitude, elevation,
+            tectonic_settings, major_rock_1) %&gt;% 
+  mutate_if(is.character, factor)
+
+
+volcano_df %&gt;% count(volcano_type)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   volcano_type      n
+##   &lt;fct&gt;         &lt;int&gt;
+## 1 Other           379
+## 2 Shield          118
+## 3 Stratovolcano   461</code></pre>
+<pre class="r"><code>world&lt;- map_data(&quot;world&quot;)
+
+ggplot() + 
+  geom_map(data = world, map = world,
+           aes(long, lat, map_id = region),
+           color = &quot;white&quot;, fill = &quot;grey50&quot;, alpha = 0.2) + 
+  geom_point(data = volcano_df,
+             aes(longitude, latitude, color = volcano_type),
+             alpha = 0.8)</code></pre>
+<p><img src="/post/2020-09-21-tidymodels-tutorial-2_files/figure-html/unnamed-chunk-4-1.png" width="1440" /></p>
+<p>The biggest thing I know about volcanoes is the <a href="https://en.wikipedia.org/wiki/Ring_of_Fire">Ring of Fire</a> “fire” and there it is!</p>
+</div>
+<div id="build-a-model" class="section level2">
+<h2>Build a model</h2>
+<p>Instead of splitting this small-ish dataset into training and testing data, let’s create a set of bootstrap resamples.</p>
+<pre class="r"><code>library(tidymodels)
+
+
+volcano_boot &lt;- bootstraps(volcano_df)
+volcano_boot</code></pre>
+<pre><code>## # Bootstrap sampling 
+## # A tibble: 25 x 2
+##    splits            id         
+##    &lt;list&gt;            &lt;chr&gt;      
+##  1 &lt;split [958/357]&gt; Bootstrap01
+##  2 &lt;split [958/372]&gt; Bootstrap02
+##  3 &lt;split [958/346]&gt; Bootstrap03
+##  4 &lt;split [958/356]&gt; Bootstrap04
+##  5 &lt;split [958/365]&gt; Bootstrap05
+##  6 &lt;split [958/363]&gt; Bootstrap06
+##  7 &lt;split [958/353]&gt; Bootstrap07
+##  8 &lt;split [958/360]&gt; Bootstrap08
+##  9 &lt;split [958/363]&gt; Bootstrap09
+## 10 &lt;split [958/367]&gt; Bootstrap10
+## # ... with 15 more rows</code></pre>
+</div>
+<div id="treat-inbalance" class="section level1">
+<h1>treat inbalance</h1>
+<pre class="r"><code># install.packages(&quot;themis&quot;) # for smote
+library(themis)
+
+volcano_rec &lt;- recipe(volcano_type~., data = volcano_df) %&gt;% 
+  update_role(volcano_number, new_role =&quot;Id&quot;) %&gt;% 
+  step_other(tectonic_settings) %&gt;%  # tectonic_setting 중 갯수가 작은건 others 로 날려버리자
+  step_other(major_rock_1) %&gt;% 
+  step_dummy(tectonic_settings, major_rock_1) %&gt;% 
+  step_zv(all_predictors()) %&gt;% 
+  step_normalize(all_predictors()) %&gt;% 
+  step_smote(volcano_type)
+
+volcano_prep &lt;- prep(volcano_rec)
+volcano_prep</code></pre>
+<pre><code>## Data Recipe
+## 
+## Inputs:
+## 
+##       role #variables
+##         Id          1
+##    outcome          1
+##  predictor          5
+## 
+## Training data contained 958 data points and no missing data.
+## 
+## Operations:
+## 
+## Collapsing factor levels for tectonic_settings [trained]
+## Collapsing factor levels for major_rock_1 [trained]
+## Dummy variables from tectonic_settings, major_rock_1 [trained]
+## Zero variance filter removed no terms [trained]
+## Centering and scaling for latitude, longitude, ... [trained]
+## SMOTE based on volcano_type [trained]</code></pre>
+<pre class="r"><code>juice(volcano_prep) # checking</code></pre>
+<pre><code>## # A tibble: 1,383 x 14
+##    volcano_number latitude longitude elevation volcano_type tectonic_settin~
+##             &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt;
+##  1         283001   0.618      0.984   -0.875  Shield                 -0.289
+##  2         355096  -1.21      -0.830    2.97   Stratovolca~           -0.289
+##  3         342080  -0.0153    -1.04     1.50   Stratovolca~           -0.289
+##  4         213004   0.746      0.101   -0.131  Other                  -0.289
+##  5         321040   0.988     -1.32     1.34   Stratovolca~           -0.289
+##  6         283170   0.718      1.06    -0.0992 Stratovolca~           -0.289
+##  7         221170  -0.156      0.158   -0.0956 Stratovolca~           -0.289
+##  8         221110  -0.0601     0.158   -0.440  Stratovolca~           -0.289
+##  9         284160   0.120      1.11    -0.644  Stratovolca~           -0.289
+## 10         342100  -0.0165    -1.04     1.35   Stratovolca~           -0.289
+## # ... with 1,373 more rows, and 8 more variables:
+## #   tectonic_settings_Rift.zone...Oceanic.crust....15.km. &lt;dbl&gt;,
+## #   tectonic_settings_Subduction.zone...Continental.crust...25.km. &lt;dbl&gt;,
+## #   tectonic_settings_Subduction.zone...Oceanic.crust....15.km. &lt;dbl&gt;,
+## #   tectonic_settings_other &lt;dbl&gt;, major_rock_1_Basalt...Picro.Basalt &lt;dbl&gt;,
+## #   major_rock_1_Dacite &lt;dbl&gt;,
+## #   major_rock_1_Trachybasalt...Tephrite.Basanite &lt;dbl&gt;,
+## #   major_rock_1_other &lt;dbl&gt;</code></pre>
+<pre class="r"><code>juice(volcano_prep) %&gt;% count(volcano_type)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   volcano_type      n
+##   &lt;fct&gt;         &lt;int&gt;
+## 1 Other           461
+## 2 Shield          461
+## 3 Stratovolcano   461</code></pre>
+<pre class="r"><code>rf_spec &lt;- rand_forest(trees = 1000) %&gt;% 
+  set_mode(&quot;classification&quot;) %&gt;% 
+  set_engine(&quot;ranger&quot;) 
+
+volcano_wf &lt;- workflow( ) %&gt;% 
+  add_recipe(volcano_rec) %&gt;% 
+  add_model(rf_spec)
+
+volcano_wf</code></pre>
+<pre><code>## == Workflow ====================================================================================
+## Preprocessor: Recipe
+## Model: rand_forest()
+## 
+## -- Preprocessor --------------------------------------------------------------------------------
+## 6 Recipe Steps
+## 
+## * step_other()
+## * step_other()
+## * step_dummy()
+## * step_zv()
+## * step_normalize()
+## * step_smote()
+## 
+## -- Model ---------------------------------------------------------------------------------------
+## Random Forest Model Specification (classification)
+## 
+## Main Arguments:
+##   trees = 1000
+## 
+## Computational engine: ranger</code></pre>
+<p>Let’s train our multinomial classification model on these resamples, but keep in mind that the performance estimates are probably pessimistically biased.</p>
+<p>Let’s preprocess our data next, using a recipe. Since there are significantly fewer shield volcanoes compared to the other groups, let’s use <a href="https://tidymodels.github.io/themis/reference/step_smote.html">SMOTE upsampling (via the themis package)</a> to balance the classes.</p>
+<pre class="r"><code>library(themis)
+
+volcano_rec &lt;- recipe(volcano_type ~ ., data = volcano_df) %&gt;%
+  update_role(volcano_number, new_role = &quot;Id&quot;) %&gt;%
+  step_other(tectonic_settings) %&gt;%
+  step_other(major_rock_1) %&gt;%
+  step_dummy(tectonic_settings, major_rock_1) %&gt;%
+  step_zv(all_predictors()) %&gt;%
+  step_normalize(all_predictors()) %&gt;%
+  step_smote(volcano_type)</code></pre>
+<p>Let’s walk through the steps in this recipe.</p>
+<ul>
+<li>First, we must tell the <code>recipe()</code> what our model is going to be (using a formula here) and what data we are using.</li>
+<li>Next, we update the role for volcano number, since this is a variable we want to keep around for convenience as an identifier for rows but is not a predictor or outcome.</li>
+<li>There are a lot of different tectonic setting and rocks in this dataset, so let’s collapse some of the less frequently occurring levels into an <code>"Other"</code> category, for each predictor.</li>
+<li>Next, we can create indicator variables and remove variables with zero variance.</li>
+<li>Before oversampling, we center and scale (i.e. normalize) all the predictors.</li>
+<li>Finally, we implement SMOTE oversampling so that the volcano types are balanced!</li>
+</ul>
+<pre class="r"><code>volcano_prep &lt;- prep(volcano_rec)
+juice(volcano_prep)</code></pre>
+<pre><code>## # A tibble: 1,383 x 14
+##    volcano_number latitude longitude elevation volcano_type tectonic_settin~
+##             &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt;
+##  1         283001   0.618      0.984   -0.875  Shield                 -0.289
+##  2         355096  -1.21      -0.830    2.97   Stratovolca~           -0.289
+##  3         342080  -0.0153    -1.04     1.50   Stratovolca~           -0.289
+##  4         213004   0.746      0.101   -0.131  Other                  -0.289
+##  5         321040   0.988     -1.32     1.34   Stratovolca~           -0.289
+##  6         283170   0.718      1.06    -0.0992 Stratovolca~           -0.289
+##  7         221170  -0.156      0.158   -0.0956 Stratovolca~           -0.289
+##  8         221110  -0.0601     0.158   -0.440  Stratovolca~           -0.289
+##  9         284160   0.120      1.11    -0.644  Stratovolca~           -0.289
+## 10         342100  -0.0165    -1.04     1.35   Stratovolca~           -0.289
+## # ... with 1,373 more rows, and 8 more variables:
+## #   tectonic_settings_Rift.zone...Oceanic.crust....15.km. &lt;dbl&gt;,
+## #   tectonic_settings_Subduction.zone...Continental.crust...25.km. &lt;dbl&gt;,
+## #   tectonic_settings_Subduction.zone...Oceanic.crust....15.km. &lt;dbl&gt;,
+## #   tectonic_settings_other &lt;dbl&gt;, major_rock_1_Basalt...Picro.Basalt &lt;dbl&gt;,
+## #   major_rock_1_Dacite &lt;dbl&gt;,
+## #   major_rock_1_Trachybasalt...Tephrite.Basanite &lt;dbl&gt;,
+## #   major_rock_1_other &lt;dbl&gt;</code></pre>
+<p>Before using <code>prep()</code> these steps have been defined but not actually run or implemented. The <code>prep()</code> function is where everything gets evaluated. You can use <code>juice()</code> to get the preprocessed data back out and check on your results.</p>
+<p>Now it’s time to specify our model. I am using a <a href="https://workflows.tidymodels.org/"><code>workflow()</code></a> in this example for convenience; these are objects that can help you manage modeling pipelines more easily, with pieces that fit together like Lego blocks. This <code>workflow()</code> contains both the recipe and the model, a random forest classifier. The ranger implementation for random forest can handle multinomial classification without any special handling.</p>
+<pre class="r"><code>rf_spec &lt;- rand_forest(trees = 1000) %&gt;%
+  set_mode(&quot;classification&quot;) %&gt;%
+  set_engine(&quot;ranger&quot;)
+
+volcano_wf &lt;- workflow() %&gt;%
+  add_recipe(volcano_rec) %&gt;%
+  add_model(rf_spec)
+
+volcano_wf</code></pre>
+<pre><code>## == Workflow ====================================================================================
+## Preprocessor: Recipe
+## Model: rand_forest()
+## 
+## -- Preprocessor --------------------------------------------------------------------------------
+## 6 Recipe Steps
+## 
+## * step_other()
+## * step_other()
+## * step_dummy()
+## * step_zv()
+## * step_normalize()
+## * step_smote()
+## 
+## -- Model ---------------------------------------------------------------------------------------
+## Random Forest Model Specification (classification)
+## 
+## Main Arguments:
+##   trees = 1000
+## 
+## Computational engine: ranger</code></pre>
+<p>Now we can fit our workflow to our resamples.</p>
+<pre class="r"><code>volcano_res &lt;- fit_resamples(
+  volcano_wf, 
+  resamples = volcano_boot,
+  control = control_resamples(save_pred =  T, # 예측 결과값도 가지고 있음
+                              
+                              verbose = F)
+)
+
+volcano_res</code></pre>
+<pre><code>## # Resampling results
+## # Bootstrap sampling 
+## # A tibble: 25 x 5
+##    splits           id          .metrics        .notes         .predictions     
+##    &lt;list&gt;           &lt;chr&gt;       &lt;list&gt;          &lt;list&gt;         &lt;list&gt;           
+##  1 &lt;split [958/357~ Bootstrap01 &lt;tibble [2 x 3~ &lt;tibble [0 x ~ &lt;tibble [357 x 6~
+##  2 &lt;split [958/372~ Bootstrap02 &lt;tibble [2 x 3~ &lt;tibble [0 x ~ &lt;tibble [372 x 6~
+##  3 &lt;split [958/346~ Bootstrap03 &lt;tibble [2 x 3~ &lt;tibble [0 x ~ &lt;tibble [346 x 6~
+##  4 &lt;split [958/356~ Bootstrap04 &lt;tibble [2 x 3~ &lt;tibble [0 x ~ &lt;tibble [356 x 6~
+##  5 &lt;split [958/365~ Bootstrap05 &lt;tibble [2 x 3~ &lt;tibble [0 x ~ &lt;tibble [365 x 6~
+##  6 &lt;split [958/363~ Bootstrap06 &lt;tibble [2 x 3~ &lt;tibble [0 x ~ &lt;tibble [363 x 6~
+##  7 &lt;split [958/353~ Bootstrap07 &lt;tibble [2 x 3~ &lt;tibble [0 x ~ &lt;tibble [353 x 6~
+##  8 &lt;split [958/360~ Bootstrap08 &lt;tibble [2 x 3~ &lt;tibble [0 x ~ &lt;tibble [360 x 6~
+##  9 &lt;split [958/363~ Bootstrap09 &lt;tibble [2 x 3~ &lt;tibble [0 x ~ &lt;tibble [363 x 6~
+## 10 &lt;split [958/367~ Bootstrap10 &lt;tibble [2 x 3~ &lt;tibble [0 x ~ &lt;tibble [367 x 6~
+## # ... with 15 more rows</code></pre>
+<div id="explore-results" class="section level2">
+<h2>Explore results</h2>
+<p>One of the biggest differences when working with multiclass problems is that your <strong>performance metrics</strong> are different. The <a href="https://yardstick.tidymodels.org/">yardstick</a> package provides implementations for many <a href="https://yardstick.tidymodels.org/articles/multiclass.html">multiclass metrics</a>.</p>
+<pre class="r"><code>volcano_res %&gt;% 
+  collect_metrics()</code></pre>
+<pre><code>## # A tibble: 2 x 5
+##   .metric  .estimator  mean     n std_err
+##   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
+## 1 accuracy multiclass 0.634    25 0.00540
+## 2 roc_auc  hand_till  0.784    25 0.00381</code></pre>
+<p>We can create a confusion matrix to see how the different classes did.</p>
+<pre class="r"><code>volcano_res %&gt;% 
+  collect_predictions() %&gt;% 
+  conf_mat(volcano_type, .pred_class)</code></pre>
+<pre><code>##                Truth
+## Prediction      Other Shield Stratovolcano
+##   Other          1921    327           804
+##   Shield          345    595           288
+##   Stratovolcano  1268    193          3076</code></pre>
+<p>Even after using SMOTE oversampling, the stratovolcanoes are easiest to identify.</p>
+<p>We computed accuracy and AUC during <code>fit_resamples()</code>, but we can always go back and compute other metrics we are interested in if we saved the predictions. We can even <code>group_by()</code> resample, if we like.</p>
+<pre class="r"><code>volcano_res %&gt;% 
+  collect_predictions() %&gt;% 
+  ppv(volcano_type, .pred_class)</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 ppv     macro          0.597</code></pre>
+<pre class="r"><code>volcano_res %&gt;%
+  collect_predictions() %&gt;%
+  group_by(id) %&gt;% 
+  group_by(id)%&gt;% 
+  ppv(volcano_type, .pred_class) %&gt;% 
+  ggplot(aes(.estimate)) +
+  geom_histogram(bins = 10)</code></pre>
+<p><img src="/post/2020-09-21-tidymodels-tutorial-2_files/figure-html/unnamed-chunk-15-1.png" width="1440" /></p>
+<p>What can we learn about variable importance, using the <a href="https://koalaverse.github.io/vip/">vip</a> package?</p>
+<pre class="r"><code>rf_spec %&gt;% 
+  set_engine(&quot;ranger&quot;, importance = &quot;permutation&quot;) %&gt;% 
+  fit(
+    volcano_type ~ .,
+    data = juice(volcano_prep) %&gt;% 
+      select(-volcano_number) %&gt;% 
+      janitor::clean_names()
+  ) %&gt;% 
+  vip(geom = &#39;point&#39;)</code></pre>
+<p><img src="/post/2020-09-21-tidymodels-tutorial-2_files/figure-html/unnamed-chunk-16-1.png" width="1440" /></p>
+<p>The spatial information is really important for the model, followed by the presence of basalt. Let’s explore the spatial information a bit further, and make a map showing how right or wrong our modeling is across the world. Let’s join the predictions back to the original data.</p>
+<pre class="r"><code>volcano_pred &lt;- volcano_res %&gt;% 
+  collect_predictions() %&gt;% 
+  mutate(correct = volcano_type == .pred_class) %&gt;% 
+  left_join(volcano_df %&gt;% 
+              mutate(.raw = row_number()))
+
+volcano_pred</code></pre>
+<pre><code>## # A tibble: 3,392,404 x 15
+##    id    .pred_Other .pred_Shield .pred_Stratovol~  .row .pred_class
+##    &lt;chr&gt;       &lt;dbl&gt;        &lt;dbl&gt;            &lt;dbl&gt; &lt;int&gt; &lt;fct&gt;      
+##  1 Boot~       0.415      0.00737            0.578     2 Stratovolc~
+##  2 Boot~       0.415      0.00737            0.578     2 Stratovolc~
+##  3 Boot~       0.415      0.00737            0.578     2 Stratovolc~
+##  4 Boot~       0.415      0.00737            0.578     2 Stratovolc~
+##  5 Boot~       0.415      0.00737            0.578     2 Stratovolc~
+##  6 Boot~       0.415      0.00737            0.578     2 Stratovolc~
+##  7 Boot~       0.415      0.00737            0.578     2 Stratovolc~
+##  8 Boot~       0.415      0.00737            0.578     2 Stratovolc~
+##  9 Boot~       0.415      0.00737            0.578     2 Stratovolc~
+## 10 Boot~       0.415      0.00737            0.578     2 Stratovolc~
+## # ... with 3,392,394 more rows, and 9 more variables: volcano_type &lt;fct&gt;,
+## #   correct &lt;lgl&gt;, volcano_number &lt;dbl&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,
+## #   elevation &lt;dbl&gt;, tectonic_settings &lt;fct&gt;, major_rock_1 &lt;fct&gt;, .raw &lt;int&gt;</code></pre>
+<p>Then, let’s make a map using <code>stat_summary_hex()</code>. Within each hexagon, let’s take the mean of <code>correct</code> to find what percentage of volcanoes were classified correctly, across all our bootstrap resamples.</p>
+<pre class="r"><code>ggplot() +
+  geom_map(data = world, map = world,
+           aes(long, lat, map_id = region),
+           color = &quot;white&quot;, fill = &quot;grey50&quot;, alpha = 0.2) + 
+  stat_summary_2d(data = volcano_pred,
+                  aes(longitude, latitude, z = as.integer(correct)),
+                  fun = &quot;mean&quot;,
+                  alpha = 0.7)</code></pre>
+<p><img src="/post/2020-09-21-tidymodels-tutorial-2_files/figure-html/unnamed-chunk-18-1.png" width="1350" /></p>
+<pre class="r"><code>library(hexbin)
+ggplot() +
+  geom_map(data = world, map = world,
+           aes(long, lat, map_id = region),
+           color = &quot;white&quot;, fill = &quot;grey50&quot;, alpha = 0.2) + 
+  stat_summary_hex(data = volcano_pred,
+                  aes(longitude, latitude, z = as.integer(correct)),
+                  fun = &quot;mean&quot;,
+                  alpha = 0.7, bins = 60) + 
+  scale_fill_gradient(high = &quot;cyan3&quot;, labels = scales::percent) +
+  labs(fill = &quot;Percent Classified correctly&quot;)</code></pre>
+<p><img src="/post/2020-09-21-tidymodels-tutorial-2_files/figure-html/unnamed-chunk-19-1.png" width="1440" /></p>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//rhyeu.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

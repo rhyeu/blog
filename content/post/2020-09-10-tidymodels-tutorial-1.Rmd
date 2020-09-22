@@ -1,0 +1,215 @@
+---
+title: xgboost in tidymodel
+author: 류성균
+date: '2020-09-10'
+slug: xgboost in tidymodel
+categories:
+  - Today I learn
+tags:
+  - R
+  - xgboost
+  - machine-learning
+---
+
+```{r}
+# install.packages(c("AmesHousing", "janitor", "dplyr", "rsample", "recipes", "parsnip", "tune", "dials", "workflows", "yardstick", "doParallel"))
+ # data
+
+library(AmesHousing)
+
+# data cleaning
+library(janitor)
+
+# data prep
+library(dplyr)
+
+# tidymodels
+library(rsample)
+library(recipes)
+library(parsnip)
+library(tune)
+library(dials)
+library(workflows)
+library(yardstick)
+
+
+
+library("xgboost")
+library("kernlab")
+library(tidyverse)
+# speed up computation with parrallel processing (optional)
+library(doParallel)
+all_cores <- parallel::detectCores(logical = FALSE)
+registerDoParallel(cores = all_cores)
+```
+
+```{r}
+## load the data
+# set the random seed so we can reproduce any simulated results.
+set.seed(1234)
+
+# load the housing data and clean names
+ames_data <- make_ames() %>% janitor::clean_names()
+```
+
+# Step 1. Initial Data Split
+```{r}
+# Split into training and testing datasets. Stratify by Sale price
+ames_split <- rsample::initial_split(
+  ames_data,
+  prop = 0.2,
+  strata = sale_price
+)
+```
+
+```{r}
+str(ames_split)
+```
+# Step 2: Preprocessing 
+
+```{r}
+preprocessing_recipe <- recipes::recipe(sale_price ~ ., data = training(ames_split)) %>% 
+  recipes::step_string2factor(all_nominal()) %>% 
+  recipes::step_other(all_nominal(), threshold = 0.01) %>% 
+  recipes::step_nzv(all_nominal()) %>% 
+  prep()
+```
+
+# step 3: Splitting for Cross Validation
+```{r}
+ames_cv_folds <-
+recipes::bake(
+  preprocessing_recipe,
+  new_data = training(ames_split)
+) %>% 
+  rsample::vfold_cv(v = 5)
+```
+
+# step 4 : XGBoost Model Specification
+```{r}
+xgboost_model <-
+  parsnip::boost_tree(
+    mode = "regression",
+    trees = 1000,
+    min_n = tune(),
+    tree_depth = tune(),
+    learn_rate = tune(),
+    loss_reduction = tune()
+  ) %>% 
+  set_engine("xgboost", objective = "reg:squarederror")
+```
+
+# Step 5: Grid Specification
+```{r}
+xgboost_params <- 
+  dials::parameters(
+    min_n(),
+    tree_depth(),
+    learn_rate(),
+    loss_reduction()
+  )
+```
+
+```{r}
+xgboost_grid <-
+  dials::grid_max_entropy(
+    xgboost_params,
+    size = 60
+  )
+
+knitr::kable(head(xgboost_grid))
+```
+
+# step 6 : Define the Workflow 
+```{r}
+xgboost_wf <- 
+  workflows::workflow() %>% 
+  add_model(xgboost_model) %>% 
+  add_formula(sale_price ~ .)
+```
+
+# Step 7: Tune the Model
+```{r}
+# hyperparameter tuning
+xgboost_tuned <- tune::tune_grid(
+  object = xgboost_wf,
+  resamples = ames_cv_folds,
+  grid = xgboost_grid,
+  metrics = yardstick::metric_set(rmse, rsq, mae),
+  control = tune::control_grid(verbose = T)
+)
+```
+
+```{r}
+xgboost_tuned %>% 
+  tune::show_best(metric = "rmse") %>% 
+  knitr::kable()
+```
+
+```{r}
+xgboost_best_params <- xgboost_tuned %>% 
+  tune::select_best("rmse")
+knitr::kable(xgboost_best_params)
+```
+
+```{r}
+xgboost_model_final <-  xgboost_model %>% 
+  finalize_model(xgboost_best_params)
+```
+
+
+# Step 8: Evalueate Performance on Test Data
+```{r}
+train_processed <- bake(preprocessing_recipe,
+                        new_data = training(ames_split))
+
+train_prediction <- xgboost_model_final %>% 
+  fit(
+    formula = sale_price ~ .,
+    data = train_processed
+  ) %>% 
+  predict(new_data = train_processed) %>% 
+  bind_cols(training(ames_split))
+
+xgboost_score_train <-
+  train_prediction %>% 
+  yardstick::metrics(sale_price, .pred) %>% 
+  mutate(.estimate = format(round(.estimate, 2), big.mark = ","))
+
+knitr::kable(xgboost_score_train)
+```
+
+```{r}
+test_processed <- bake(preprocessing_recipe,
+                       new_data = testing(ames_split))
+
+test_prediction <- xgboost_model_final %>% 
+  fit(
+    formula = sale_price ~ .,
+    data = train_processed
+  ) %>% 
+  predict(new_data = test_processed) %>% 
+  bind_cols(testing(ames_split))
+
+xgboost_score <-
+  test_prediction %>% 
+  yardstick::metrics(sale_price, .pred) %>% 
+  mutate(.estimate = format(round(.estimate, 2), big.mark = ","))
+
+knitr::kable(xgboost_score)  
+```
+
+```{r}
+house_prediction_residual <- test_prediction %>% 
+  arrange(.pred) %>% 
+  mutate(residual_pct = (sale_price - .pred) / .pred) %>% 
+  select(.pred, residual_pct)
+
+ggplot(house_prediction_residual, aes(x = .pred, y = residual_pct)) +
+  geom_point() + 
+  xlab("Predicted Sales Price") + 
+  ylab("Residual (%)") + 
+  scale_x_continuous(labels = scales::dollar_format()) + 
+  scale_y_continuous(labels = scales::percent)
+```
+
