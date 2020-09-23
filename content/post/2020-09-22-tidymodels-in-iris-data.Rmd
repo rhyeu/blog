@@ -1,0 +1,98 @@
+---
+title: tidymodels in iris data
+author: 류성균
+date: '2020-09-22'
+slug: tidymodels-in-iris-data
+categories:
+  - Today I learn
+tags:
+  - R
+  - xgboost
+  - machine-learning
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+
+# data visualization
+library(GGally) # pair plot
+```
+
+
+
+## data exploration
+```{r}
+str(iris)
+```
+
+## data split
+```{r}
+iris_split <- rsample::initial_split(
+  iris, 
+  prop = 0.7,
+  strata = Species
+)
+```
+
+```{r}
+iris_split %>% str()
+```
+
+```{r}
+ggplot() + 
+  geom_point(aes(x = Sepal.Length, y = Sepal.Width, color = Species), data = training(iris_split))
+```
+
+
+```{r}
+ggplot() + 
+  geom_point(aes(x = Petal.Length, y = Petal.Width, color = Species), data = training(iris_split))
+```
+
+```{r}
+ggpairs(data = training(iris_split), aes(color = Species))
+```
+
+- Sepal.Length~Sepal.Width조합 말고는 의미가 있을 지도
+
+
+# data modeling 
+```{r}
+iris_rec <- training(iris_split) %>% 
+  recipe(Species ~ .) %>% 
+  step_center(all_predictors()) %>% 
+  step_scale(all_predictors()) %>% prep()
+```
+
+```{r}
+juice(iris_rec)
+str(training(iris_split))
+str(testing(iris_split))
+```
+
+
+# Split for Cross Validation
+```{r}
+iris_cv_folds <-recipes::bake(
+    iris_rec,
+    new_data = training(iris_split)
+  ) %>% rsample::vfold_cv(v = 5)
+```
+
+```{r}
+rf_spec <- rand_forest(trees = 1000) %>% 
+  set_mode("classification") %>% 
+  set_engine("ranger")
+
+iris_rf_wf <- workflow() %>% 
+  add_recipe(iris_rec) %>% 
+  add_model(rf_spec)
+```
+
+
+
+
+

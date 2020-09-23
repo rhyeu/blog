@@ -15,30 +15,30 @@ tags:
 # install.packages(c("AmesHousing", "janitor", "dplyr", "rsample", "recipes", "parsnip", "tune", "dials", "workflows", "yardstick", "doParallel"))
  # data
 
-library(AmesHousing)
+library(AmesHousing, quietly = T)
 
 # data cleaning
-library(janitor)
+library(janitor, quietly = T)
 
 # data prep
-library(dplyr)
+library(dplyr, quietly = T)
 
 # tidymodels
-library(rsample)
-library(recipes)
-library(parsnip)
-library(tune)
-library(dials)
-library(workflows)
-library(yardstick)
+library(rsample, quietly = T)
+library(recipes, quietly = T)
+library(parsnip, quietly = T)
+library(tune, quietly = T)
+library(dials, quietly = T)
+library(workflows, quietly = T)
+library(yardstick, quietly = T)
 
 
 
-library("xgboost")
-library("kernlab")
-library(tidyverse)
+library("xgboost", quietly = T)
+library("kernlab", quietly = T)
+library(tidyverse, quietly = T)
 # speed up computation with parrallel processing (optional)
-library(doParallel)
+library(doParallel, quietly = T)
 all_cores <- parallel::detectCores(logical = FALSE)
 registerDoParallel(cores = all_cores)
 ```

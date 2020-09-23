@@ -1,0 +1,141 @@
+---
+title: tidymodels in iris data
+author: 류성균
+date: '2020-09-22'
+slug: tidymodels-in-iris-data
+categories:
+  - Today I learn
+tags:
+  - R
+  - xgboost
+  - machine-learning
+editor_options: 
+  chunk_output_type: console
+---
+
+
+
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## √ ggplot2 3.3.2     √ purrr   0.3.4
+## √ tibble  3.0.3     √ dplyr   1.0.2
+## √ tidyr   1.1.2     √ stringr 1.4.0
+## √ readr   1.3.1     √ forcats 0.5.0</code></pre>
+<pre><code>## -- Conflicts ---------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(tidymodels)</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------ tidymodels 0.1.1 --</code></pre>
+<pre><code>## √ broom     0.7.0      √ recipes   0.1.13
+## √ dials     0.0.8      √ rsample   0.0.7 
+## √ infer     0.5.3      √ tune      0.1.1 
+## √ modeldata 0.0.2      √ workflows 0.1.3 
+## √ parsnip   0.1.3      √ yardstick 0.0.7</code></pre>
+<pre><code>## -- Conflicts --------------------------------------------------------- tidymodels_conflicts() --
+## x scales::discard() masks purrr::discard()
+## x dplyr::filter()   masks stats::filter()
+## x recipes::fixed()  masks stringr::fixed()
+## x dplyr::lag()      masks stats::lag()
+## x yardstick::spec() masks readr::spec()
+## x recipes::step()   masks stats::step()</code></pre>
+<pre class="r"><code># data visualization
+library(GGally) # pair plot</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;GGally&#39;:
+##   method from   
+##   +.gg   ggplot2</code></pre>
+<div id="data-exploration" class="section level2">
+<h2>data exploration</h2>
+<pre class="r"><code>str(iris)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div id="data-split" class="section level2">
+<h2>data split</h2>
+<pre class="r"><code>iris_split &lt;- rsample::initial_split(
+  iris, 
+  prop = 0.7,
+  strata = Species
+)</code></pre>
+<pre class="r"><code>iris_split %&gt;% str()</code></pre>
+<pre><code>## List of 4
+##  $ data  :&#39;data.frame&#39;:  150 obs. of  5 variables:
+##   ..$ Sepal.Length: num [1:150] 5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##   ..$ Sepal.Width : num [1:150] 3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##   ..$ Petal.Length: num [1:150] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##   ..$ Petal.Width : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##   ..$ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ in_id : int [1:105] 1 3 4 6 7 8 9 10 11 12 ...
+##  $ out_id: logi NA
+##  $ id    : tibble [1 x 1] (S3: tbl_df/tbl/data.frame)
+##   ..$ id: chr &quot;Resample1&quot;
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;rsplit&quot; &quot;mc_split&quot;</code></pre>
+<pre class="r"><code>ggplot() + 
+  geom_point(aes(x = Sepal.Length, y = Sepal.Width, color = Species), data = training(iris_split))</code></pre>
+<p><img src="/post/2020-09-22-tidymodels-in-iris-data_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>ggplot() + 
+  geom_point(aes(x = Petal.Length, y = Petal.Width, color = Species), data = training(iris_split))</code></pre>
+<p><img src="/post/2020-09-22-tidymodels-in-iris-data_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>ggpairs(data = training(iris_split), aes(color = Species))</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="/post/2020-09-22-tidymodels-in-iris-data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>Sepal.Length~Sepal.Width조합 말고는 의미가 있을 지도</li>
+</ul>
+</div>
+<div id="data-modeling" class="section level1">
+<h1>data modeling</h1>
+<pre class="r"><code>iris_rec &lt;- training(iris_split) %&gt;% 
+  recipe(Species ~ .) %&gt;% 
+  step_center(all_predictors()) %&gt;% 
+  step_scale(all_predictors()) %&gt;% prep()</code></pre>
+<pre class="r"><code>juice(iris_rec)</code></pre>
+<pre><code>## # A tibble: 105 x 5
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+##  1       -0.907      0.995         -1.34       -1.32 setosa 
+##  2       -1.38       0.306         -1.39       -1.32 setosa 
+##  3       -1.50       0.0765        -1.28       -1.32 setosa 
+##  4       -0.552      1.91          -1.17       -1.06 setosa 
+##  5       -1.50       0.765         -1.34       -1.19 setosa 
+##  6       -1.02       0.765         -1.28       -1.32 setosa 
+##  7       -1.73      -0.383         -1.34       -1.32 setosa 
+##  8       -1.14       0.0765        -1.28       -1.45 setosa 
+##  9       -0.552      1.45          -1.28       -1.32 setosa 
+## 10       -1.26       0.765         -1.23       -1.32 setosa 
+## # ... with 95 more rows</code></pre>
+<pre class="r"><code>str(training(iris_split))</code></pre>
+<pre><code>## &#39;data.frame&#39;:    105 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.7 4.6 5.4 4.6 5 4.4 4.9 5.4 4.8 ...
+##  $ Sepal.Width : num  3.5 3.2 3.1 3.9 3.4 3.4 2.9 3.1 3.7 3.4 ...
+##  $ Petal.Length: num  1.4 1.3 1.5 1.7 1.4 1.5 1.4 1.5 1.5 1.6 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 0.2 0.2 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<pre class="r"><code>str(testing(iris_split))</code></pre>
+<pre><code>## &#39;data.frame&#39;:    45 obs. of  5 variables:
+##  $ Sepal.Length: num  4.9 5 4.3 5.8 5.1 5.1 4.8 5 5 4.8 ...
+##  $ Sepal.Width : num  3 3.6 3 4 3.5 3.8 3.4 3 3.4 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.1 1.2 1.4 1.5 1.9 1.6 1.6 1.6 ...
+##  $ Petal.Width : num  0.2 0.2 0.1 0.2 0.3 0.3 0.2 0.2 0.4 0.2 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div id="split-for-cross-validation" class="section level1">
+<h1>Split for Cross Validation</h1>
+<pre class="r"><code>iris_cv_folds &lt;-recipes::bake(
+    iris_rec,
+    new_data = training(iris_split)
+  ) %&gt;% rsample::vfold_cv(v = 5)</code></pre>
+<pre class="r"><code>rf_spec &lt;- rand_forest(trees = 1000) %&gt;% 
+  set_mode(&quot;classification&quot;) %&gt;% 
+  set_engine(&quot;ranger&quot;)
+
+iris_rf_wf &lt;- workflow() %&gt;% 
+  add_recipe(iris_rec) %&gt;% 
+  add_model(rf_spec)</code></pre>
+</div>
